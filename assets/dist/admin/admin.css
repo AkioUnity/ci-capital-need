@@ -1,0 +1,55 @@
+/**
+ * Stylesheet for Admin Panel
+ * 
+ * Recommend to avoid this and use SASS file instead:
+ * 	/assets/sass/admin.scss
+ */
+
+.main-header .logo {
+    padding: 0;
+}
+
+.skin-purple .left-side, .skin-purple .main-sidebar, .skin-purple .wrapper {
+    background-color: #ffffff;
+}
+
+.navbar .menu-item{
+    float: left;
+    background: transparent none;
+    padding: 13px 15px;
+    color:white;
+    font-size: 16px;
+}
+.grocery-crud-table > tbody{
+    background-color: white;
+}
+.create {
+    background-color: #0d56ad;
+    color: white;
+}
+.create:hover{
+    background-color: #0e73bb;
+    color: white;
+}
+.create:focus,.create:active:focus{
+    background-color: #052963;
+    color: white;
+}
+.skin-purple .main-sidebar{
+    background-color: white;
+}
+
+.skin-purple .sidebar-menu>li.header {
+    color: #070707;
+    background: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    margin-top: 10px;
+}
+.filter-group{
+    margin: 10px;
+}
+.filter-group > .form-control{
+    margin:10px;
+    width: 195px;
+}
