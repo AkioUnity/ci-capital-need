@@ -20,11 +20,15 @@ class Capital extends Admin_Controller {
         $crud->display_as('BuildingComponentID','Building Components');
         $crud->display_as('bMEP','Amount');
 
-////		$crud->set_field_upload('image_url', UPLOAD_BLOG_POST);
+		$crud->set_field_upload('image_url', UPLOAD_CAPITAL_NEED);
+
         $crud->set_relation('FacilityID', 'tblfacilities', 'FacilityName');
         $crud->set_relation('UrgencyID', 'stblurgencies', 'Urgency');
         $crud->set_relation('BuildingComponentID', 'stblbuilding_components', 'BuildingComponents');
         $crud->set_relation('Accuracy', 'stblaccuracies', 'FullName');
+
+        $crud->set_relation('BCSubtypeID', 'stblbcsubtype', 'BCSubtype');
+        $crud->set_relation('BCSubSubtypeID', 'stblbcsubsubtype', 'BCSubSubtype');
 
 
         $facilityId=$this->input->get_post('facility', null);
@@ -113,6 +117,7 @@ class Capital extends Admin_Controller {
     public function facilities()
     {
         $crud = $this->generate_crud('tblfacilities');
+        $crud->set_field_upload('image_url', UPLOAD_FACILITY);
         $this->mPageTitle = 'Facilities';
         $this->render_crud();
     }

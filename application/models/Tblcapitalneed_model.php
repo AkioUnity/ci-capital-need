@@ -11,7 +11,7 @@ class Tblcapitalneed_model extends MY_Model {
 	
 	protected $where = array('UrgencyID is NOT NULL' => NULL);
 	protected $order_by = array('ID', 'DESC');
-//	protected $upload_fields = array('image_url' => UPLOAD_BLOG_POST);
+    protected $upload_fields = array('image_url' => UPLOAD_CAPITAL_NEED);
 //
 	// Append tags
 //	protected function callback_after_get($result)

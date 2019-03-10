@@ -110,3 +110,5 @@ define('CI_BOOTSTRAP_VERSION',		'Build 20170324');	// will follow semantic versi
 // Upload paths
 define('UPLOAD_COVER_PHOTO',	'assets/uploads/cover_photos');
 define('UPLOAD_BLOG_POST',		'assets/uploads/blog_posts');
+define('UPLOAD_CAPITAL_NEED',		'assets/uploads/capitalNeeds');
+define('UPLOAD_FACILITY',		'assets/uploads/facility');

@@ -143,36 +143,36 @@
                                     <?php }?>
         						</tr>
         						
-        						<tr class="filter-row gc-search-row">
-        							<td class="no-border-right <?php if ($buttons_counter === 0) {?>hidden<?php }?>">
-                                        <?php if (!$unset_delete) { ?>
-            							     <div class="floatL t5">
-            							         <input type="checkbox" class="select-all-none" />
-            							     </div>
-                                         <?php } ?>
-        							 </td>
-        							<td class="no-border-left <?php if ($buttons_counter === 0) {?>hidden<?php }?>">
-                                        <div class="floatL">
-                                            <a href="javascript:void(0);" title="<?php echo $this->l('list_delete')?>"
-                                               class="hidden btn btn-default delete-selected-button">
-                                                <i class="fa fa-trash-o text-danger"></i>
-                                                <span class="text-danger"><?php echo $this->l('list_delete')?></span>
-                                            </a>
-                                        </div>
-                                        <div class="floatR l5">
-                                            <a href="javascript:void(0);" class="btn btn-default gc-refresh">
-                                                <i class="fa fa-refresh"></i>
-                                            </a>
-                                        </div>
-                                        </div>
-                                        <div class="clear"></div>
-                                    </td>
-                                    <?php foreach($columns as $column){?>
-                                        <td>
-                                            <input type="text" class="form-control searchable-input floatL" placeholder="Search <?php echo $column->display_as; ?>" name="<?php echo $column->field_name; ?>" />
-                                        </td>
-                                    <?php }?>
-        						</tr>
+<!--        						<tr class="filter-row gc-search-row">-->
+<!--        							<td class="no-border-right --><?php //if ($buttons_counter === 0) {?><!--hidden--><?php //}?><!--">-->
+<!--                                        --><?php //if (!$unset_delete) { ?>
+<!--            							     <div class="floatL t5">-->
+<!--            							         <input type="checkbox" class="select-all-none" />-->
+<!--            							     </div>-->
+<!--                                         --><?php //} ?>
+<!--        							 </td>-->
+<!--        							<td class="no-border-left --><?php //if ($buttons_counter === 0) {?><!--hidden--><?php //}?><!--">-->
+<!--                                        <div class="floatL">-->
+<!--                                            <a href="javascript:void(0);" title="--><?php //echo $this->l('list_delete')?><!--"-->
+<!--                                               class="hidden btn btn-default delete-selected-button">-->
+<!--                                                <i class="fa fa-trash-o text-danger"></i>-->
+<!--                                                <span class="text-danger">--><?php //echo $this->l('list_delete')?><!--</span>-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+<!--                                        <div class="floatR l5">-->
+<!--                                            <a href="javascript:void(0);" class="btn btn-default gc-refresh">-->
+<!--                                                <i class="fa fa-refresh"></i>-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="clear"></div>-->
+<!--                                    </td>-->
+<!--                                    --><?php //foreach($columns as $column){?>
+<!--                                        <td>-->
+<!--                                            <input type="text" class="form-control searchable-input floatL" placeholder="Search --><?php //echo $column->display_as; ?><!--" name="--><?php //echo $column->field_name; ?><!--" />-->
+<!--                                        </td>-->
+<!--                                    --><?php //}?>
+<!--        						</tr>-->
 
         					</thead>
         					<tbody>

@@ -93,7 +93,7 @@ class CI_Pagination {
 	 *
 	 * @var	int
 	 */
-	public $per_page = 10;
+	public $per_page = 15;
 
 	/**
 	 * Current page

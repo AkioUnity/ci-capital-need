@@ -53,3 +53,24 @@
     margin:10px;
     width: 195px;
 }
+
+.skin-purple .main-header .navbar {
+    background-color: #fdfdfd;
+}
+
+.skin-purple .main-header .navbar .sidebar-toggle {
+    color: #202e63;
+}
+.navbar .menu-item {
+    color: #202e63;
+    font-weight: 600;
+}
+
+.skin-purple .main-header .navbar .sidebar-toggle:hover {
+    background-color: #bbbbbb;
+    font-weight: 700;
+}
+
+.gc-container {
+    width:95%
+}
