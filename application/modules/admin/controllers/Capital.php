@@ -27,8 +27,8 @@ class Capital extends Admin_Controller {
         $crud->set_relation('BuildingComponentID', 'stblbuilding_components', 'BuildingComponents');
         $crud->set_relation('Accuracy', 'stblaccuracies', 'FullName');
 
-        $crud->set_relation('BCSubtypeID', 'stblbcsubtype', 'BCSubtype');
-        $crud->set_relation('BCSubSubtypeID', 'stblbcsubsubtype', 'BCSubSubtype');
+        $crud->set_relation('BCSubtypeID', 'stblbcsubtypes', 'BCSubtype');
+        $crud->set_relation('BCSubSubtypeID', 'stblbcsubsubtypes', 'BCSubSubtype');
 
 
         $facilityId=$this->input->get_post('facility', null);
@@ -46,6 +46,16 @@ class Capital extends Admin_Controller {
         if ($componentId)
             $crud->where('BuildingComponentID',$componentId);
         $this->mViewData['component'] = $componentId;
+//subtypeId
+        $subtypeId=$this->input->get_post('subtypeId', null);
+        if ($subtypeId)
+            $crud->where('BCSubtypeID',$subtypeId);
+        $this->mViewData['subtypeId'] = $subtypeId;
+//subsubtypeId
+        $subsubtypeId=$this->input->get_post('subsubtypeId', null);
+        if ($subsubtypeId)
+            $crud->where('BCSubSubtypeID',$subsubtypeId);
+        $this->mViewData['subsubtypeId'] = $subsubtypeId;
 
         $this->load->model('tblfacility_model', 'facility');
         $this->mViewData['facilityList'] = $this->facility->dropdown('ID','FacilityName');
@@ -53,6 +63,10 @@ class Capital extends Admin_Controller {
         $this->mViewData['urgencyList'] = $this->urgency->dropdown('ID','Urgency');
         $this->load->model('stblbuilding_Component_model', 'component');
         $this->mViewData['componentList'] = $this->component->dropdown('ID','BuildingComponents');
+        $this->load->model('stblbcsubtype_model', 'subtype');
+        $this->mViewData['subtypeList'] = $this->subtype->dropdown('ID','BCSubtype');
+//        $this->load->model('stblbcsubsubtype_model', 'subsubtype');
+//        $this->mViewData['subsubtypeList'] = $this->subsubtype->dropdown('ID','BCSubSubtype');
 
 //		$state = $crud->getState();
 //		if ($state==='add')

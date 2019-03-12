@@ -7,6 +7,8 @@
 
 .main-header .logo {
     padding: 0;
+    line-height: 26px;font-size: 14px;
+    height: 42px;
 }
 
 .skin-purple .left-side, .skin-purple .main-sidebar, .skin-purple .wrapper {
@@ -73,4 +75,18 @@
 
 .gc-container {
     width:95%
+}
+
+.skin-purple .main-header .logo {
+    background-color: #fff;
+}
+
+.skin-purple .main-header .logo:hover{background-color: #bde3fd
+}
+
+.skin-purple .main-header li.user-header{background-color: #a3baf6
+}
+
+.content-wrapper, .right-side {
+    background-color: #ffffff;
 }
