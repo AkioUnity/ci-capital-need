@@ -39,6 +39,16 @@
                 <?php endforeach; ?>
             </select>
         </div>
+
+        <div class="filter-group">
+            <span>BCSubSubType</span>
+            <select name="subsubtypeId" class="form-control" onchange="this.form.submit()">
+                <option value="">All</option>
+                <?php foreach ($subsubtypeList as $id => $name): ?>
+                    <option value="<?php echo $id; ?>" <?php if ($subsubtypeId == $id) echo 'selected'; ?>><?php echo $name; ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
     </form>
 
 </ul>

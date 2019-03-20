@@ -139,7 +139,7 @@
                                         <?php echo $this->l('list_actions'); ?>
                                     </th>
                                     <?php foreach($columns as $column){?>
-                                        <th class="column-with-ordering" data-order-by="<?php echo $column->field_name; ?>"><?php echo $column->display_as; ?></th>
+                                        <th><?php echo $column->display_as; ?></th>
                                     <?php }?>
         						</tr>
         						

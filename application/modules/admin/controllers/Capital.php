@@ -65,8 +65,8 @@ class Capital extends Admin_Controller {
         $this->mViewData['componentList'] = $this->component->dropdown('ID','BuildingComponents');
         $this->load->model('stblbcsubtype_model', 'subtype');
         $this->mViewData['subtypeList'] = $this->subtype->dropdown('ID','BCSubtype');
-//        $this->load->model('stblbcsubsubtype_model', 'subsubtype');
-//        $this->mViewData['subsubtypeList'] = $this->subsubtype->dropdown('ID','BCSubSubtype');
+        $this->load->model('stblbcsubsubtype_model', 'subsubtype');
+        $this->mViewData['subsubtypeList'] = $this->subsubtype->dropdown('ID','BCSubSubtype');
 
 //		$state = $crud->getState();
 //		if ($state==='add')
