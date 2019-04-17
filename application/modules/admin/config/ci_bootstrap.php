@@ -91,6 +91,7 @@ $config['ci_bootstrap'] = array(
 			'icon'		=> 'fa fa-building',	// can use Ionicons instead of FontAwesome
 			'children'  => array(
 				'Capital Need Entries '		=> 'capital/entries',
+//                'Charts '		=> 'capital/charts',
 				'Urgency'	=> 'capital/urgency',
 				'Building Components'			=> 'capital/components',
                 'Accuracy'			=> 'capital/accuracy',
@@ -175,8 +176,8 @@ $config['ci_bootstrap'] = array(
 
 	// Debug tools
 	'debug' => array(
-		'view_data'	=> false,
-		'profiler'	=> false
+		'view_data'	=> true,
+		'profiler'	=> true
 	),
 );
 

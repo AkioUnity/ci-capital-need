@@ -3,7 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Capital extends Admin_Controller {
 
-	public function index()
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->helper('url');
+        $this->load->library('gcharts');
+    }
+
+    public function index()
 	{
 		redirect('capital/entries');
 	}
@@ -79,6 +86,8 @@ class Capital extends Admin_Controller {
 //			$crud->set_relation('author_id', 'admin_users', '{first_name} {last_name}');
 //		}
 
+        $crud->add_action('Charts', '', 'admin/capital/charts', 'fa fa-bar-chart');
+
 		$this->mPageTitle = 'Capital Needs';
 		$this->render_crud();
 	}
@@ -134,6 +143,196 @@ class Capital extends Admin_Controller {
         $crud->set_field_upload('image_url', UPLOAD_FACILITY);
         $this->mPageTitle = 'Facilities';
         $this->render_crud();
+    }
+
+    public function charts0($capital_id)
+    {
+        $this->gcharts->load('ColumnChart');
+
+        $this->load->model('tblannualcost_model', 'cost');
+        $data = $this->cost->select('ACYear','ACAmount')
+            ->where("CapitalNeedID",$capital_id)
+            ->result();
+
+        $this->gcharts->DataTable('Inventory')
+            ->addColumn('string', 'Classroom', 'class')
+            ->addColumn('number', 'Pencils1', 'pencils2')
+            ->addColumn('number', 'Markers', 'markers')
+            ->addColumn('number', 'Erasers', 'erasers')
+            ->addColumn('number', 'Binders', 'binders')
+            ->addRow(array(
+                'Science Class',
+                rand(50, 100),
+                rand(50, 100),
+                rand(50, 100),
+                rand(50, 100)
+            ));
+
+        $this->gcharts->DataTable('Price')
+            ->addColumn('string', 'Classroom', 'class')
+            ->addColumn('number', 'Pencils', 'pencils')
+            ->addColumn('number', 'Markers', 'markers')
+            ->addColumn('number', 'Erasers', 'erasers')
+            ->addColumn('number', 'Binders', 'binders')
+            ->addRow(array(
+                'Science Class',
+                rand(50, 100),
+                rand(50, 100),
+                rand(50, 100),
+                rand(50, 100)
+            ));
+
+
+        $config = array(
+            'title' => 'Inventory2'
+        );
+
+        $this->gcharts->ColumnChart('Inventory')->setConfig($config);
+
+        $config = array(
+            'title' => 'Price'
+        );
+
+        $this->gcharts->ColumnChart('Price')->setConfig($config);
+        // display view
+//        $this->mViewData['crud_output'] = $crud_data->output;
+        $this->render('gcharts/column_chart_basic');
+    }
+
+    public function charts($capital_id)
+    {
+        $this->gcharts->load('ColumnChart');
+
+        $this->load->model('tblannualcost_model', 'cost');
+        $price = $this->cost->select('ACYear, ACAmount')
+            ->get_many_by("CapitalNeedID",$capital_id);
+
+        $this->load->model('tblcapitalneed_model', 'capital');
+        $etc= $this->capital->select('bMEP, aCoreShell,dSitesUtilities,cOtherSystems')
+            ->get_by("ID",$capital_id);
+
+
+        $this->gcharts->DataTable('Finances')
+            ->addColumn('date', 'Year')
+            ->addColumn('number', 'Cost');
+
+        $this->gcharts->DataTable('Etc')
+            ->addColumn('string', 'Type')
+            ->addColumn('number', 'Cost');
+
+
+        $this->gcharts->DataTable('Etc')->addRow(array('MEP',empty($etc->bMEP)?null:$etc->bMEP));
+        $this->gcharts->DataTable('Etc')->addRow(array('Core & Shell',empty($etc->aCoreShell)?null:$etc->aCoreShell));
+        $this->gcharts->DataTable('Etc')->addRow(array('Sites & Utilities',empty($etc->dSitesUtilities)?null:$etc->dSitesUtilities));
+        $this->gcharts->DataTable('Etc')->addRow(array('Devices',empty($etc->cOtherSystems)?null:$etc->cOtherSystems));
+
+        foreach ($price as $row)
+        {
+            $data = array(
+                new jsDate($row->ACYear), //Year
+                $row->ACAmount
+            );
+
+            $this->gcharts->DataTable('Finances')->addRow($data);
+        }
+
+        //Either Chain functions together to setup configuration objects
+        $titleStyle = $this->gcharts->textStyle()
+            ->color('#55BB9A')
+            ->fontName('Georgia')
+            ->fontSize(22);
+
+        $legendStyle = $this->gcharts->textStyle()
+            ->color('#F3BB00')
+            ->fontName('Arial')
+            ->fontSize(16);
+
+        //Or pass an array with configuration options
+        $legend = new legend(array(
+            'position' => 'right',
+            'alignment' => 'start',
+            'textStyle' => $legendStyle
+        ));
+
+        $tooltipStyle = new textStyle(array(
+            'color' => '#000000',
+            'fontName' => 'Courier New',
+            'fontSize' => 10
+        ));
+
+        $tooltip = new tooltip(array(
+            'showColorCode' => TRUE,
+            'textStyle' => $tooltipStyle
+        ));
+
+        $config = array(
+            'axisTitlesPosition' => 'out',
+            'backgroundColor' => new backgroundColor(array(
+                'stroke' => '#CDCDCD',
+                'strokeWidth' => 4,
+                'fill' => '#EEFFCC'
+            )),
+            'barGroupWidth' => '20%',
+            'chartArea' => new chartArea(array(
+                'left' => 80,
+                'top' => 80,
+                'width' => '80%',
+                'height' => '60%'
+            )),
+            'titleTextStyle' => $titleStyle,
+            'legend' => $legend,
+            'tooltip' => $tooltip,
+            'title' => 'Capital Need Finances',
+            'titlePosition' => 'out',
+            'width' => 500,
+            'height' => 450,
+            'colors' => array('#00A100', '#FF0000', '#00FF00'),
+            'hAxis' => new hAxis(array(
+                'baselineColor' => '#BB99BB',
+                'gridlines' => array(
+                    'color' => '#ABCDEF',
+                    'count' => 1
+                ),
+                'textPosition' => 'out',
+                'textStyle' => new textStyle(array(
+                    'color' => '#C42B5F',
+                    'fontName' => 'Tahoma',
+                    'fontSize' => 14
+                )),
+                'slantedText' => TRUE,
+                'slantedTextAngle' => 70,
+//                'title' => 'Years',
+                'titleTextStyle' => new textStyle(array(
+                    'color' => '#BB33CC',
+                    'fontName' => 'Impact',
+                    'fontSize' => 18
+                )),
+                'maxAlternation' => 2,
+                'maxTextLines' => 10,
+                'showTextEvery' => 1
+            )),
+            'vAxis' => new vAxis(array(
+                'baseline' => 1,
+                'baselineColor' => '#5F0BB1',
+                'format' => '$ ##,###',
+                'textPosition' => 'out',
+                'textStyle' => new textStyle(array(
+                    'color' => '#DDAA88',
+                    'fontName' => 'Verdana',
+                    'fontSize' => 10
+                )),
+                'title' => 'Dollars',
+                'titleTextStyle' => new textStyle(array(
+                    'color' => 'blue',
+                    'fontName' => 'Verdana',
+                    'fontSize' => 14
+                )),
+            ))
+        );
+
+        $this->gcharts->ColumnChart('Finances')->setConfig($config);
+        $this->gcharts->ColumnChart('Etc')->setConfig($config);
+        $this->render('gcharts/column_chart_basic');
     }
 
 }
